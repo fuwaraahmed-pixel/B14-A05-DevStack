@@ -5,7 +5,7 @@ export default function Technologies({ onAddToStack }) {
     const [technologies, setTechnologies] = useState([]);
 
     useEffect(() => {
-        fetch('/data/technologies.json')
+        fetch('./data/technologies.json')
             .then((res) => res.json())
             .then((data) => setTechnologies(data))
             .catch((err) => console.error('Error fetching technologies:', err));

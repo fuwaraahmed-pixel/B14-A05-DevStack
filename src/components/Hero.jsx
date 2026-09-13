@@ -1,5 +1,5 @@
 import React from 'react';
-import bannerImg from '../../assets/banner-stack.png';
+import bannerImg from '../assets/banner-stack.png';
 
 export default function Hero() {
   return (

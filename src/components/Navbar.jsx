@@ -1,96 +1,67 @@
 import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
-  // মোবাইল মেনু খোলা বা বন্ধ রাখার জন্য state
-  const [isOpen, setIsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-3.5 flex items-center justify-between gap-2">
-        
-        {/* ১. বামপাশের সেকশন: মোবাইল মেনু বাটন + ব্র্যান্ড লোগো ও নাম */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          {/* মোবাইল মেনু বাটন */}
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            className="md:hidden text-gray-700 hover:text-gray-900 p-1.5 rounded-lg border border-gray-200 text-xl font-bold focus:outline-none"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? '✕' : '☰'}
-          </button>
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          
+          {/* Mobile Hamburger (Left on mobile) */}
+          <div className="flex md:hidden items-center">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-gray-700 hover:text-gray-900 focus:outline-none"
+              aria-label="Toggle Menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
 
-          {/* ব্র্যান্ড লোগো ও নাম */}
-          <a href="#home" className="flex items-center gap-2 shrink-0">
-            <div className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 text-white font-black text-sm sm:text-base px-2.5 py-1 rounded-lg shadow-sm">
+          {/* Brand Logo (Left on Desktop, Center on Mobile) */}
+          <div className="flex items-center gap-2.5">
+            <div className="w-10 h-10 rounded-xl brand-gradient flex items-center justify-center text-white font-black text-sm tracking-wider shadow-md shadow-pink-500/20">
               DS
             </div>
-            <span className="text-base sm:text-xl font-extrabold text-gray-900 tracking-tight whitespace-nowrap">
-              Dev <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text text-transparent">Stack</span>
+            <span className="text-2xl font-black tracking-tight text-slate-900">
+              Dev <span className="brand-gradient-text">Stack</span>
             </span>
-          </a>
-        </div>
+          </div>
 
-        {/* ২. বড় স্ক্রিনের নেভিগেশন লিংকসমূহ */}
-        <div className="hidden md:flex items-center space-x-6 font-medium text-sm lg:text-base text-gray-600">
-          <a href="#home" className="text-pink-600 font-semibold hover:text-pink-700 transition-colors">Home</a>
-          <a href="#technologies" className="hover:text-gray-900 transition-colors">Technologies</a>
-          <a href="#projects" className="hover:text-gray-900 transition-colors">Projects</a>
-          <a href="#about" className="hover:text-gray-900 transition-colors">About</a>
-          <a href="#contact" className="hover:text-gray-900 transition-colors">Contact</a>
-        </div>
+          {/* Desktop Nav Links (Center) */}
+          <nav className="hidden md:flex items-center space-x-8 text-sm font-semibold">
+            <a href="#home" className="text-[#FF2A85] hover:opacity-80 transition-colors">Home</a>
+            <a href="#technologies" className="text-slate-600 hover:text-slate-900 transition-colors">Technologies</a>
+            <a href="#projects" className="text-slate-600 hover:text-slate-900 transition-colors">Projects</a>
+            <a href="#about" className="text-slate-600 hover:text-slate-900 transition-colors">About</a>
+            <a href="#contact" className="text-slate-600 hover:text-slate-900 transition-colors">Contact</a>
+          </nav>
 
-        {/* ৩. ডানপাশের সাইন ইন ও সাইন আপ বাটন */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          <button className="text-gray-700 hover:text-gray-900 text-xs sm:text-sm font-semibold px-2.5 sm:px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors">
-            Sign In
-          </button>
-          <button className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1.5 rounded-full shadow-sm hover:opacity-95 whitespace-nowrap transition-all">
-            Sign Up
-          </button>
-        </div>
+          {/* Auth Buttons (Right) */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <button className="text-sm font-semibold text-slate-700 hover:text-slate-900 px-3 py-2">
+              Sign In
+            </button>
+            <button className="text-sm font-bold text-white brand-gradient px-5 py-2.5 rounded-full shadow-md shadow-pink-500/25 hover:opacity-95 transition-all transform active:scale-95">
+              Sign Up
+            </button>
+          </div>
 
+        </div>
       </div>
 
-      {/* ৪. মোবাইল স্ক্রিনের ড্রপডাউন মেনু */}
-      {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 px-4 py-3 space-y-2 font-medium text-sm text-gray-700 animate-fadeIn">
-          <a 
-            href="#home" 
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-lg text-pink-600 bg-pink-50 font-semibold"
-          >
-            Home
-          </a>
-          <a 
-            href="#technologies" 
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            Technologies
-          </a>
-          <a 
-            href="#projects" 
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            Projects
-          </a>
-          <a 
-            href="#about" 
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            About
-          </a>
-          <a 
-            href="#contact" 
-            onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            Contact
-          </a>
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-b border-gray-200 px-4 pt-3 pb-6 space-y-3">
+          <a href="#home" className="block text-base font-semibold text-[#FF2A85]" onClick={() => setMobileMenuOpen(false)}>Home</a>
+          <a href="#technologies" className="block text-base font-medium text-slate-700 hover:text-slate-900" onClick={() => setMobileMenuOpen(false)}>Technologies</a>
+          <a href="#projects" className="block text-base font-medium text-slate-700 hover:text-slate-900" onClick={() => setMobileMenuOpen(false)}>Projects</a>
+          <a href="#about" className="block text-base font-medium text-slate-700 hover:text-slate-900" onClick={() => setMobileMenuOpen(false)}>About</a>
+          <a href="#contact" className="block text-base font-medium text-slate-700 hover:text-slate-900" onClick={() => setMobileMenuOpen(false)}>Contact</a>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

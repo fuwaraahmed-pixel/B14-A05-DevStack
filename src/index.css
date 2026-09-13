@@ -1,0 +1,23 @@
+:root {
+  --brand-gradient: linear-gradient(135deg, #FF5E62 0%, #FF2A85 50%, #9B2CFF 100%);
+}
+
+.brand-gradient {
+  background: var(--brand-gradient);
+}
+
+.brand-gradient-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom scrollbars and subtle smooth animations */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #FAFAFC;
+}
